@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/eel'
 require './lib/narwhal'
 require './lib/octopus'
+require './lib/eel'
 
 class OctopusTest < Minitest::Test
   def test_it_exists
