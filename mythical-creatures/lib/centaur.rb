@@ -1,5 +1,5 @@
 class Centaur
-  attr_reader :name, :breed, :standing, :laying
+  attr_reader :name, :breed
 
   def initialize(name, breed)
     @name = name
@@ -8,51 +8,44 @@ class Centaur
     @standing = true
     @laying = false
     @sleep = false
+    @rested = false
+    @sick = false
     @actions = 0
-
-  end
-
-  def refuse
-    "NO!"
-  end
-
-  def lay_down
-    @standing = !@standing
-    @laying = !@laying
-  end
-
-  def stand_up
-    if @laying == true
-      @standing = !@standing
-      @laying = !@laying
-    else
-    end
-  end
-
-  def laying?
-    @laying
   end
 
   def shoot
-    if (@cranky == false && @actions < 3) && @standing == true
+    if @actions < 3 && @laying == false
       @actions += 1
-      "Twang!!!"
-    else refuse
+      return "Twang!!!"
+    else
+      return "NO!"
     end
   end
 
   def run
-    if (@cranky == false && @actions < 3) && @standing == true
-    @actions += 1
-    "Clop clop clop clop!!!"
-  else refuse
+    if @actions < 3 && @laying == false
+      @actions += 1
+      return "Clop clop clop clop!!!"
+    else
+      return "NO!"
     end
   end
 
   def cranky?
-    if @actions >= 3 && @sleeping != true
-      @cranky = !@cranky
-    else @cranky
+    if @actions < 3
+      @cranky = false
+      return @cranky
+    else
+      @cranky = true
+      return @cranky
+    end
+  end
+
+  def stand_up
+    if @laying == true
+      @standing = true
+      @laying = false
+    else
     end
   end
 
@@ -61,10 +54,29 @@ class Centaur
   end
 
   def sleep
-    if @standing != true
+    if @laying == true
       @sleep = true
-      @cranky = !@cranky
-    else refuse
+      @actions = 0
+      @cranky = false
+    else
+      "NO!"
+    end
+  end
+
+  def lay_down
+    @standing = false
+    @laying = true
+  end
+
+  def laying?
+    @laying
+  end
+
+  def drink_potion
+    if @standing == true && @rested == false
+      @rested = true
+    else @standing == true && @rested == true
+      @sick = true
     end
   end
 

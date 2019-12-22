@@ -30,6 +30,7 @@ class Ogre
     @human_hit
   end
 
+
 end
 
 
@@ -56,7 +57,7 @@ class Human
   end
 
   def knocked_out?
-
+    true
   end
 
 end
