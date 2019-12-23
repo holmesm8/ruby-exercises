@@ -2,7 +2,7 @@ class Ghostbuster
 
   def initialize(name)
     @name = name
-    @car = ""
+    @car = "ECTO-1"
   end
 
   def say_my_name
@@ -16,8 +16,6 @@ class Ghostbuster
   def ride
     "#{@car}"
   end
-
-
 end
 
 ghostbuster = Ghostbuster.new("Ray")

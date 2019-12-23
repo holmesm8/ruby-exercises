@@ -1,10 +1,10 @@
 class Car
-
   attr_accessor :color
 
   def initialize
     @mileage = 0
     @wheel_count = 4
+    @color = "purple"
   end
 
   def horn
@@ -27,11 +27,7 @@ class Car
     else
       puts "Nope!"
     end
-
   end
-
-
-
 end
 
 
