@@ -1,4 +1,6 @@
 class Gnome
+  attr_reader :type
+  
   def initialize(type)
     @type = type
   end
@@ -7,4 +9,3 @@ class Gnome
     @type == 'roving'
   end
 end
-

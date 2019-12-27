@@ -1,4 +1,6 @@
 class Squid
+  attr_reader :size
+  
   def initialize(size)
     @size = size
   end
@@ -7,4 +9,3 @@ class Squid
     @size == 'giant'
   end
 end
-

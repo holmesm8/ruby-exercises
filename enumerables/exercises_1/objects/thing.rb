@@ -1,4 +1,6 @@
 class Thing
+  attr_reader :adjective
+
   def initialize(adjective)
     @adjective = adjective
   end
@@ -7,4 +9,3 @@ class Thing
     @adjective == 'weird'
   end
 end
-
