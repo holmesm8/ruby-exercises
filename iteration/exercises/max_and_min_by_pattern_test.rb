@@ -59,11 +59,10 @@ class MaxAndMinByPatternTest < Minitest::Test
   end
 
   def test_5
-    skip
     stats = [3001, 431, 1695, 0.27601, 0.340]
     most_digits = stats[0]
     stats.each do |num|
-      if num.digits.count > most_digits.count.length
+      if num.to_s.length > most_digits.to_s.length
         most_digits = num
       end
     end
@@ -72,7 +71,6 @@ class MaxAndMinByPatternTest < Minitest::Test
 
 
   def test_6
-    skip
     stats = {
       games_played: 3001,
       home_runs: 431,
@@ -82,7 +80,7 @@ class MaxAndMinByPatternTest < Minitest::Test
     }
     most_digits = stats[stats.keys.first]
     stats.each do |key, value|
-      if value.digits.count > most_digits.length
+      if value.to_s.length > most_digits.to_s.length
         most_digits = value
       end
     end
@@ -110,7 +108,7 @@ class MaxAndMinByPatternTest < Minitest::Test
     }
     oldest = {name: nil, age: 0}
     ages.each do |key, value|
-      if value > oldest[age]
+      if value > oldest[:age]
         oldest = {name: key.to_s, age: value}
       end
     end
@@ -119,18 +117,25 @@ class MaxAndMinByPatternTest < Minitest::Test
   end
 
   def test_9
-    skip
     programmers = [["katrina", "sandi", "jim", "aaron", "desi"], ["abby", "jon", "susan"]]
-    # Your Code Here
-
+    fewest_programmers = ["katrina", "sandi", "jim", "aaron", "desi"]
+    programmers.each do |ele|
+      if ele.length < fewest_programmers.length
+        fewest_programmers = ele
+      end
+    end
     assert_equal ["abby", "jon", "susan"], fewest_programmers
   end
 
   def test_10
-    skip
     programmers = {ruby: ["katrina", "sandi", "jim", "aaron", "desi"], java: ["abby", "jon", "susan"]}
-    # Your Code Here
-
+    values = ["katrina", "sandi", "jim", "aaron", "desi"]
+    fewest_programmers = :ruby
+    programmers.each do |key, value|
+      if value.length < values.length
+        fewest_programmers = key
+      end
+    end
     assert_equal :java, fewest_programmers
   end
 end
