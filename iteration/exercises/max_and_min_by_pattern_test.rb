@@ -1,3 +1,4 @@
+gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 
@@ -30,18 +31,17 @@ class MaxAndMinByPatternTest < Minitest::Test
   end
 
   def test_3
-    skip
     meals = ["banana", "nuts", "salad", "steak", "cake"]
     shortest_word = meals[0]
     meals.each do |meal|
-      # Your Code Here
+      if meal.length < shortest_word.length
+        shortest_word = meal
+      end
     end
-
     assert_equal "nuts", shortest_word
   end
 
   def test_4
-    skip
     meals = {
       breakfast: "banana",
       snack: "nuts",
@@ -51,9 +51,10 @@ class MaxAndMinByPatternTest < Minitest::Test
     }
     shortest_word = meals[meals.keys.first]
     meals.each do |meal, dish|
-      # Your Code Here
+      if dish.length < shortest_word.length
+        shortest_word = (meals[meal] = dish)
+      end
     end
-
     assert_equal "nuts", shortest_word
   end
 
@@ -61,8 +62,11 @@ class MaxAndMinByPatternTest < Minitest::Test
     skip
     stats = [3001, 431, 1695, 0.27601, 0.340]
     most_digits = stats[0]
-    # Your Code Here
-
+    stats.each do |num|
+      if num.digits.count > most_digits.count.length
+        most_digits = num
+      end
+    end
     assert_equal 0.27601, most_digits
   end
 
@@ -77,21 +81,26 @@ class MaxAndMinByPatternTest < Minitest::Test
       on_base_percentage: 0.340
     }
     most_digits = stats[stats.keys.first]
-    # Your Code Here
-
+    stats.each do |key, value|
+      if value.digits.count > most_digits.length
+        most_digits = value
+      end
+    end
     assert_equal 0.27601, most_digits
   end
 
   def test_7
-    skip
     ages = [39, 45, 29, 24, 50]
-    # Your Code Here
-
+    oldest = 0
+    ages.each do |age|
+      if age > oldest
+        oldest = age
+      end
+    end
     assert_equal 50, oldest
   end
 
   def test_8
-    skip
     ages = {
       abdi: 39,
       hassan: 45,
@@ -99,8 +108,12 @@ class MaxAndMinByPatternTest < Minitest::Test
       margaret: 24,
       miguel: 50
     }
-    # Your Code Here
-
+    oldest = {name: nil, age: 0}
+    ages.each do |key, value|
+      if value > oldest[age]
+        oldest = {name: key.to_s, age: value}
+      end
+    end
     expected = {name: "miguel", age: 50}
     assert_equal expected, oldest
   end

@@ -34,7 +34,7 @@ class MapPatternTest < Minitest::Test
     numbers = [1, 2, 3, 4, 5]
     doubles = []
     numbers.each do |number|
-      # Your Code Here
+      doubles << number * 2
     end
     assert_equal [2, 4, 6, 8, 10], doubles
   end
@@ -49,7 +49,7 @@ class MapPatternTest < Minitest::Test
     }
     doubles = {}
     numbers.each do |name, number|
-      # Your Code Here
+      doubles[name] = number * 2
     end
     expected = {
       one: 2,
@@ -64,8 +64,7 @@ class MapPatternTest < Minitest::Test
   def test_5
     numbers = [1, 2, 3, 4, 5]
     squares = []
-    # Your Code Here
-
+    numbers.each {|num| squares << num ** 2}
     assert_equal [1, 4, 9, 16, 25], squares
   end
 
@@ -78,8 +77,9 @@ class MapPatternTest < Minitest::Test
       five: 5
     }
     squares = {}
-    # Your Code Here
-
+    numbers.each do |name, num|
+      squares[name] = num ** 2
+    end
     expected = {
       one: 1,
       two: 4,
@@ -92,8 +92,8 @@ class MapPatternTest < Minitest::Test
 
   def test_7
     names = ["alice", "bob", "charlie", "david", "eve"]
-    #Your Code Here
-
+    lengths = []
+    names.each {|name| lengths << name.length}
     assert_equal [5, 3, 7, 5, 3], lengths
   end
 
@@ -105,8 +105,10 @@ class MapPatternTest < Minitest::Test
       uncle: "david",
       sister: "eve"
     }
-    #Your Code Here
-
+    lengths = {}
+    family.each do |relationship, name|
+      lengths[relationship] = name.length
+    end
     expected = {
       mother: 5,
       father: 3,
@@ -119,8 +121,8 @@ class MapPatternTest < Minitest::Test
 
   def test_9
     names = ["alice", "bob", "charlie", "david", "eve"]
-    #Your Code Here
-
+    backwards = []
+    names.each {|name| backwards << name.reverse}
     assert_equal ["ecila", "bob", "eilrahc", "divad", "eve"], backwards
   end
 
@@ -132,8 +134,10 @@ class MapPatternTest < Minitest::Test
       uncle: "david",
       sister: "eve"
     }
-    #Your Code Here
-    
+    backwards = {}
+    family.each do |relationship, name|
+      backwards[relationship] = name.reverse
+    end
     expected = {
       mother: "ecila",
       father: "bob",
