@@ -1,5 +1,5 @@
 class Centaur
-  attr_reader :name, :breed
+  attr_reader :name, :breed, :cranky
 
   def initialize(name, breed)
     @name = name
@@ -7,45 +7,36 @@ class Centaur
     @cranky = false
     @standing = true
     @laying = false
-    @sleep = false
+    @action_counter = 0
     @rested = false
     @sick = false
-    @actions = 0
   end
 
   def shoot
-    if @actions < 3 && @laying == false
-      @actions += 1
-      return "Twang!!!"
+    @action_counter += 1
+    cranky?
+    if @action_counter > 2 || @laying == true
+      "NO!"
     else
-      return "NO!"
+      "Twang!!!"
     end
   end
 
   def run
-    if @actions < 3 && @laying == false
-      @actions += 1
-      return "Clop clop clop clop!!!"
+    @action_counter += 1
+    cranky?
+    if @cranky == true || @laying == true
+      "NO!"
     else
-      return "NO!"
+      "Clop clop clop clop!!!"
     end
   end
 
   def cranky?
-    if @actions < 3
-      @cranky = false
-      return @cranky
-    else
+    if @action_counter > 2
       @cranky = true
-      return @cranky
-    end
-  end
-
-  def stand_up
-    if @laying == true
-      @standing = true
-      @laying = false
     else
+      @cranky
     end
   end
 
@@ -53,13 +44,16 @@ class Centaur
     @standing
   end
 
+  def laying?
+    @laying
+  end
+
   def sleep
-    if @laying == true
-      @sleep = true
-      @actions = 0
-      @cranky = false
-    else
+    if @standing == true
       "NO!"
+    else
+      @action_counter = 0
+      @cranky = false
     end
   end
 
@@ -68,16 +62,28 @@ class Centaur
     @laying = true
   end
 
-  def laying?
-    @laying
+  def stand_up
+    @standing = true
+    @laying = false
   end
 
   def drink_potion
-    if @standing == true && @rested == false
+    if @standing == false
+      "NO!"
+    else
       @rested = true
-    else @standing == true && @rested == true
-      @sick = true
     end
   end
 
+  def rested?
+    @rested
+  end
+
+  def sick?
+    if @rested == true
+      @sick = true
+    else
+      @sick
+    end
+  end
 end

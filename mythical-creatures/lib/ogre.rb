@@ -1,21 +1,21 @@
 class Ogre
-  attr_reader :name, :home, :encounter_counter, :swings, :human_hit
+  attr_reader :name, :home, :human_hit
+  attr_accessor :swings
 
-  def initialize(name, home = "Swamp")
+  def initialize(name, home = 'Swamp')
     @name = name
     @home = home
     @swings = 0
     @human_hit = 0
-
   end
 
   def encounter(human)
     human.encounter
     if human.notices_ogre?
       @swings += 1
-      if @swings % 2 == 0
-        @human_hit += 1
-      end
+    end
+    if @swings % 2 == 0
+      @human_hit += 1
     end
   end
 
@@ -23,25 +23,21 @@ class Ogre
     @swings += 1
   end
 
-  def hits
-    if @swings % 2 == 0
-      @human_hit += 1
-    end
-    @human_hit
+  def apologize(human)
+    human.knocked_out = false
   end
-
-
 end
 
 
 class Human
-  attr_reader :name, :encounter_counter, :notice
+  attr_reader :name, :encounter_counter, :notices
+  attr_accessor :knocked_out
 
-  def initialize(name = 'Jane')
+  def initialize(name)
     @name = name
     @encounter_counter = 0
-    @notice = false
-
+    @notices = false
+    @knocked_out = false
   end
 
   def encounter
@@ -49,15 +45,14 @@ class Human
   end
 
   def notices_ogre?
-    if @encounter_counter % 3 == 0
-      @notice = true
-    else
-      false
+    if encounter_counter % 3 == 0
+      @notices = true
     end
   end
 
   def knocked_out?
-    true
+    if @encounter_counter % 2 == 0
+     @knocked_out = true
+   end
   end
-
 end
